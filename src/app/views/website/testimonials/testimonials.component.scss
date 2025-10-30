@@ -1,0 +1,29 @@
+swiper-container {
+  --swiper-pagination-color: #facc15; /* gold */
+  --swiper-pagination-bullet-inactive-color: #1e1b4b; /* indigo-950 */
+  --swiper-pagination-bullet-inactive-opacity: 0.25;
+  padding-bottom: 28px; /* give room for bullets */
+}
+
+.tw-shadow-lg {
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.tw-shadow-xl {
+  box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+}
+
+.testimonial-card {
+  position: relative;
+}
+
+/* Fluid responsive typography for name and text */
+.t-name {
+  font-size: clamp(2rem, 3.5vw + 0.5rem, 4rem); /* bigger name */
+}
+
+.t-text {
+  font-size: clamp(1.05rem, 1.2vw + 0.9rem, 1.6rem);
+  line-height: 2;
+}
+

@@ -151,11 +151,6 @@ export class ServicesComponent implements OnInit {
           type: 'success', 
           text: '✅ Success! Your Money Switch Code has been generated and sent to your email.' 
         };
-        
-        // Close modal after 3 seconds
-        setTimeout(() => {
-          this.closeModal();
-        }, 3000);
       },
       error: (error) => {
         this.isSubmitting = false;
@@ -189,12 +184,15 @@ export class ServicesComponent implements OnInit {
       isValid = false;
     }
 
-    // Email validation
+    // Email validation with domain check
     if (!this.form.email.trim()) {
       this.errors.email = 'Email is required';
       isValid = false;
     } else if (!this.moneyCode.validateEmailFormat(this.form.email)) {
       this.errors.email = 'Enter a valid email address';
+      isValid = false;
+    } else if (!this.isValidEmailDomain(this.form.email)) {
+      this.errors.email = 'Please enter a valid email domain (e.g., .com, .in, .org)';
       isValid = false;
     }
 
@@ -255,10 +253,28 @@ export class ServicesComponent implements OnInit {
                    /^[a-zA-Z\s]+$/.test(this.form.fullName) &&
                    this.form.fullName.trim().length >= 3;
     const dobOk = !!this.form.dateOfBirth;
-    const emailOk = this.moneyCode.validateEmailFormat(this.form.email);
+    const emailOk = this.moneyCode.validateEmailFormat(this.form.email) && 
+                    this.isValidEmailDomain(this.form.email);
     const phoneOk = this.moneyCode.validatePhoneFormat(this.form.phone);
     
     return nameOk && dobOk && emailOk && phoneOk;
+  }
+
+  // Validate that email has proper domain (.com, .in, .org, .net, .co.in, etc.)
+  private isValidEmailDomain(email: string): boolean {
+    if (!email || !email.trim()) return false;
+    const trimmedEmail = email.trim().toLowerCase();
+    
+    // Check if email has @ and a domain with at least one dot after @
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(trimmedEmail)) return false;
+    
+    // Extract domain part after @
+    const domainPart = trimmedEmail.split('@')[1];
+    
+    // Check if domain ends with common extensions
+    const validDomains = ['.com', '.in', '.org', '.net', '.edu', '.gov', '.co.in', '.co', '.io'];
+    return validDomains.some(domain => domainPart.endsWith(domain));
   }
 
   payNow(): void {

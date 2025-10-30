@@ -1,1 +1,33 @@
-<p>testimonials works!</p>
+<section id="testimonials" class="tw-relative tw-py-16 md:tw-py-24 tw-bg-white">
+  <div class="tw-container tw-mx-auto tw-px-4">
+    <!-- Title -->
+    <div class="tw-text-center tw-mb-10 md:tw-mb-14">
+      <h2 class="tw-text-4xl md:tw-text-6xl tw-font-extrabold tw-text-indigo-900">What Clients Say</h2>
+      <div class="tw-mx-auto tw-mt-3 tw-h-1 tw-w-24 md:tw-w-32 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-rounded-full"></div>
+    </div>
+
+    <!-- Slider -->
+    <swiper-container [config]="swiperConfig" class="tw-w-full">
+      <swiper-slide *ngFor="let t of testimonials">
+        <div class="testimonial-card tw-relative tw-bg-indigo-900 tw-rounded-[28px] tw-shadow-xl tw-text-white tw-overflow-visible">
+          <!-- Right overlapping avatar -->
+          <div class="tw-absolute tw--right-8 md:tw--right-12 tw--top-10">
+            <div class="tw-w-28 tw-h-28 md:tw-w-44 md:tw-h-44 tw-rounded-full tw-overflow-hidden tw-shadow-2xl tw-ring-8 tw-ring-white">
+              <img [src]="t.avatar" alt="avatar" class="tw-w-full tw-h-full tw-object-cover" />
+            </div>
+          </div>
+
+          <!-- Content centered -->
+          <div class="tw-py-10 md:tw-py-16 tw-px-6 md:tw-px-20">
+            <div class="tw-text-6xl md:tw-text-7xl tw-text-white/80">“</div>
+            <h3 class="t-name tw-text-center tw-font-extrabold tw-mt-2">{{ t.name }}</h3>
+            <p class="t-text tw-mt-6 tw-text-center tw-text-white/95 tw-max-w-5xl tw-mx-auto">
+              {{ t.text }}
+            </p>
+            
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+</section>

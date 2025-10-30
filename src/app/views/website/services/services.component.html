@@ -159,14 +159,32 @@
       <i class="fas fa-times tw-text-xl"></i>
     </button>
 
+    <!-- Processing State - Show during API call -->
+    <div *ngIf="isSubmitting && !generatedData" class="tw-p-12 tw-text-center">
+      <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-space-y-6">
+        <div class="tw-relative">
+          <div class="tw-animate-spin tw-rounded-full tw-h-24 tw-w-24 tw-border-t-4 tw-border-b-4 tw-border-yellow-400"></div>
+          <div class="tw-absolute tw-inset-0 tw-flex tw-items-center tw-justify-center">
+            <i class="fas fa-magic tw-text-3xl tw-text-indigo-900 tw-animate-pulse"></i>
+          </div>
+        </div>
+        <div class="tw-space-y-2">
+          <h3 class="tw-text-2xl tw-font-bold tw-text-indigo-900">Generating Your Money Code...</h3>
+          <p class="tw-text-gray-600">Please wait while we process your information</p>
+          <p class="tw-text-sm tw-text-gray-500">This may take a few moments</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Success State - Show Generated Data -->
-    <div *ngIf="generatedData" class="tw-p-8">
+    <div *ngIf="generatedData && !isSubmitting" class="tw-p-8">
       <div class="tw-text-center tw-mb-6">
-        <div class="tw-w-20 tw-h-20 tw-bg-green-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-4">
+        <div class="tw-w-20 tw-h-20 tw-bg-green-100 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-4 tw-animate-bounce">
           <i class="fas fa-check-circle tw-text-4xl tw-text-green-600"></i>
         </div>
-        <h3 class="tw-text-3xl tw-font-bold tw-text-indigo-900 tw-mb-2">Success!</h3>
-        <p class="tw-text-gray-600">Your Money Switch Code has been generated</p>
+        <h3 class="tw-text-3xl tw-font-bold tw-text-indigo-900 tw-mb-2">🎉 Success!</h3>
+        <p class="tw-text-lg tw-text-gray-600">Your Money Switch Code has been generated</p>
+        <p class="tw-text-sm tw-text-green-600 tw-mt-2">📧 Please check your email for the detailed PDF report</p>
       </div>
 
       <div class="tw-bg-gradient-to-br tw-from-indigo-50 tw-to-purple-50 tw-rounded-2xl tw-p-6 tw-space-y-4">
@@ -232,8 +250,8 @@
       </div>
     </div>
 
-    <!-- Form State -->
-    <div *ngIf="!generatedData" class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2">
+    <!-- Form State - Hidden during processing -->
+    <div *ngIf="!generatedData && !isSubmitting" class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2">
       
       <div class="tw-bg-indigo-950 tw-text-white tw-p-6 md:tw-p-8 tw-flex tw-flex-col">
         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-extrabold tw-mb-4">
@@ -298,7 +316,7 @@
                    [disabled]="isSubmitting"
                    type="date" 
                    [class.tw-border-red-400]="errors.dateOfBirth" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100"/>
+                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
             <div *ngIf="errors.dateOfBirth" class="tw-text-red-600 tw-text-xs tw-mt-1">
               {{ errors.dateOfBirth }}
             </div>
@@ -312,11 +330,12 @@
                    [disabled]="isSubmitting"
                    type="email" 
                    [class.tw-border-red-400]="errors.email" 
-                   placeholder="example@email.com" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100"/>
+                   placeholder="example@gmail.com" 
+                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
             <div *ngIf="errors.email" class="tw-text-red-600 tw-text-xs tw-mt-1">
               {{ errors.email }}
             </div>
+            <p class="tw-text-xs tw-text-gray-500 tw-mt-1">Enter a valid email with proper domain (.com, .in, .org, etc.)</p>
           </div>
 
           <div>
@@ -334,7 +353,7 @@
                    type="tel" 
                    [class.tw-border-red-400]="errors.phone" 
                    placeholder="10-digit phone number" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100"/>
+                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
             <div *ngIf="errors.phone" class="tw-text-red-600 tw-text-xs tw-mt-1">
               {{ errors.phone }}
             </div>
@@ -346,7 +365,7 @@
             </label>
             <select [(ngModel)]="form.gender" 
                     [disabled]="isSubmitting"
-                    class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100">
+                    class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed">
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -360,7 +379,7 @@
             <input [(ngModel)]="form.profession" 
                    [disabled]="isSubmitting"
                    placeholder="Your profession" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100"/>
+                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
           </div>
         </div>
 
