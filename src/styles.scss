@@ -9,6 +9,15 @@ $save: #243a65;
 @tailwind utilities;
 
 
+// Typography: professional numerology/astrology feel
+body {
+  font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
 //ng select
 .ng-select {
   margin-top: 0.2rem;
