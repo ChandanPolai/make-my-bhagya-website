@@ -1,133 +1,14 @@
-<!-- Modern Gradient Navbar -->
-<nav 
-  [class]="isScrolled ? 'tw-bg-white/95 tw-backdrop-blur-md tw-shadow-lg' : 'tw-bg-transparent'" 
-  class="tw-fixed tw-w-full tw-top-0 tw-z-50 tw-transition-all tw-duration-300">
-  <div class="tw-max-w-7xl tw-mx-auto tw-px-4 sm:tw-px-6 lg:tw-px-8">
-    <div class="tw-flex tw-justify-between tw-items-center tw-h-20">
-      
-      <!-- Logo with Animation -->
-      <div class="tw-flex-shrink-0 tw-group tw-cursor-pointer">
-        <div class="tw-flex tw-items-center tw-space-x-2">
-          <div class="tw-w-10 tw-h-10 tw-bg-gradient-to-r tw-from-purple-600 tw-to-pink-600 tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-transform group-hover:tw-rotate-12 tw-transition tw-duration-300">
-            <span class="tw-text-white tw-font-bold tw-text-xl">M</span>
-          </div>
-          <h1 class="tw-text-2xl tw-font-bold tw-bg-gradient-to-r tw-from-purple-600 tw-to-pink-600 tw-bg-clip-text tw-text-transparent">
-            MakeBagya
-          </h1>
-        </div>
-      </div>
+<!-- Hero Section with Navbar & Banner -->
+<app-hero></app-hero>
 
-      <!-- Desktop Menu -->
-      <div class="tw-hidden md:tw-flex tw-space-x-1">
-        <a (click)="scrollToSection('home')" 
-           class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Home
-        </a>
-        <a (click)="scrollToSection('about')" 
-           class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          About
-        </a>
-        <a (click)="scrollToSection('services')" 
-           class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Services
-        </a>
-        <a (click)="scrollToSection('testimonials')" 
-           class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Testimonials
-        </a>
-        <a (click)="scrollToSection('contact')" 
-           class="tw-px-4 tw-py-2 tw-rounded-lg tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Contact
-        </a>
-      </div>
+<!-- About Section -->
+<app-about></app-about>
 
-      <!-- CTA Button with Gradient -->
-      <div class="tw-hidden md:tw-block">
-        <button class="tw-relative tw-px-8 tw-py-3 tw-bg-gradient-to-r tw-from-purple-600 tw-to-pink-600 tw-text-white tw-font-semibold tw-rounded-full tw-overflow-hidden tw-group">
-          <span class="tw-relative tw-z-10">Get Started</span>
-          <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-pink-600 tw-to-purple-600 tw-transform tw-scale-x-0 group-hover:tw-scale-x-100 tw-transition-transform tw-origin-left tw-duration-300"></div>
-        </button>
-      </div>
+<!-- Services Section -->
+<app-services></app-services>
 
-      <!-- Mobile Menu Button -->
-      <div class="md:tw-hidden">
-        <button (click)="toggleMenu()" class="tw-text-gray-700 hover:tw-text-purple-600 tw-focus:outline-none tw-p-2">
-          <svg class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
-            <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
-      </div>
-    </div>
+<!-- Testimonials Section -->
+<app-testimonials></app-testimonials>
 
-    <!-- Mobile Menu with Slide Animation -->
-    <div 
-      [class]="isMenuOpen ? 'tw-max-h-96 tw-opacity-100' : 'tw-max-h-0 tw-opacity-0'" 
-      class="md:tw-hidden tw-overflow-hidden tw-transition-all tw-duration-300 tw-ease-in-out">
-      <div class="tw-py-4 tw-space-y-2">
-        <a (click)="scrollToSection('home')" 
-           class="tw-block tw-py-3 tw-px-4 tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-rounded-lg tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Home
-        </a>
-        <a (click)="scrollToSection('about')" 
-           class="tw-block tw-py-3 tw-px-4 tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-rounded-lg tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          About
-        </a>
-        <a (click)="scrollToSection('services')" 
-           class="tw-block tw-py-3 tw-px-4 tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-rounded-lg tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Services
-        </a>
-        <a (click)="scrollToSection('testimonials')" 
-           class="tw-block tw-py-3 tw-px-4 tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-rounded-lg tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Testimonials
-        </a>
-        <a (click)="scrollToSection('contact')" 
-           class="tw-block tw-py-3 tw-px-4 tw-text-gray-700 hover:tw-text-purple-600 hover:tw-bg-purple-50 tw-rounded-lg tw-transition tw-duration-300 tw-cursor-pointer tw-font-medium">
-          Contact
-        </a>
-        <button class="tw-mt-4 tw-w-full tw-px-8 tw-py-3 tw-bg-gradient-to-r tw-from-purple-600 tw-to-pink-600 tw-text-white tw-font-semibold tw-rounded-full hover:tw-shadow-lg tw-transform hover:tw-scale-105 tw-transition tw-duration-300">
-          Get Started
-        </button>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- Main Content -->
-<main class="tw-pt-20">
-  <!-- Hero Section with Gradient Background -->
-  <div class="tw-relative">
-    <!-- Background Gradient Blobs -->
-    <div class="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-full tw-overflow-hidden -tw-z-10">
-      <div class="tw-absolute tw-top-0 -tw-left-4 tw-w-72 tw-h-72 tw-bg-purple-300 tw-rounded-full tw-mix-blend-multiply tw-filter tw-blur-xl tw-opacity-70 tw-animate-blob"></div>
-      <div class="tw-absolute tw-top-0 -tw-right-4 tw-w-72 tw-h-72 tw-bg-pink-300 tw-rounded-full tw-mix-blend-multiply tw-filter tw-blur-xl tw-opacity-70 tw-animate-blob animation-delay-2000"></div>
-      <div class="tw-absolute -tw-bottom-8 tw-left-20 tw-w-72 tw-h-72 tw-bg-indigo-300 tw-rounded-full tw-mix-blend-multiply tw-filter tw-blur-xl tw-opacity-70 tw-animate-blob animation-delay-4000"></div>
-    </div>
-    
-    <app-hero id="home"></app-hero>
-  </div>
-
-  <!-- About Section -->
-  <app-about id="about"></app-about>
-
-  <!-- Services Section with Background -->
-  <div class="tw-bg-gradient-to-b tw-from-gray-50 tw-to-white tw-py-20">
-    <app-services id="services"></app-services>
-  </div>
-
-  <!-- Testimonials Section -->
-  <app-testimonials id="testimonials"></app-testimonials>
-
-  <!-- Footer -->
-  <app-footer id="contact"></app-footer>
-</main>
-
-<!-- Scroll to Top Button -->
-<button 
-  *ngIf="isScrolled"
-  (click)="scrollToSection('home')"
-  class="tw-fixed tw-bottom-8 tw-right-8 tw-w-12 tw-h-12 tw-bg-gradient-to-r tw-from-purple-600 tw-to-pink-600 tw-text-white tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transform hover:tw-scale-110 tw-transition tw-duration-300 tw-flex tw-items-center tw-justify-center tw-z-40">
-  <svg class="tw-w-6 tw-h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
-  </svg>
-</button>
+<!-- Footer Section -->
+<app-footer></app-footer>

@@ -31,10 +31,28 @@ module.exports = {
         "red-50": "#fef2f2",
         "yellow-50": "#fefce8",
 
+        // Primary colors
         primary: "#09af72",
         "bg-primary": "#09af72",
         darkblue: "#0d163f",
         secondary: "#f8f8f8",
+
+        // ✅ Gold/Yellow colors for Numerology Theme (white-gold-indigo)
+        'gold': {
+          400: '#facc15', // Bright gold
+          500: '#eab308', // Medium gold
+          600: '#ca8a04', // Dark gold
+          700: '#a16207', // Deeper gold
+        },
+
+        // ✅ Indigo shades for Numerology Theme
+        'indigo': {
+          50: '#eef2ff',
+          100: '#e0e7ff',
+          600: '#4f46e5',
+          900: '#312e81',
+          950: '#1e1b4b', // Very dark indigo for headers
+        },
       },
     },
   },
