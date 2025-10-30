@@ -10,4 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class FooterComponent {
   currentYear = new Date().getFullYear();
+
+  navigate(section: 'home' | 'about' | 'services' | 'testimonials'): void {
+    document.dispatchEvent(new CustomEvent('scrollToSection', { detail: section }));
+  }
 }

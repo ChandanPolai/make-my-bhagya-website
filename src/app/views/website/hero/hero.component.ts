@@ -43,6 +43,14 @@ export class HeroComponent implements OnInit {
     window.addEventListener('scroll', () => {
       this.isScrolled = window.scrollY > 50;
     });
+
+    // Listen for footer/global navigation events
+    document.addEventListener('scrollToSection', (e: any) => {
+      const section = e?.detail as 'home' | 'about' | 'services' | 'testimonials';
+      if (section) {
+        this.scrollToSection(section);
+      }
+    });
   }
 
   toggleMenu() {
