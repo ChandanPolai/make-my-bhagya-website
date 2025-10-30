@@ -18,16 +18,14 @@ export class ServicesComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
 
-  // Default/fallback image when a service image is missing or fails to load
   readonly defaultImage = 'assets/images/011-spirituality.png';
 
   selectedService: PublicService | null = null;
   isModalOpen = false;
 
-  // Form model
   form = {
     fullName: '',
-    dateOfBirth: '', // ISO date from date picker
+    dateOfBirth: '',
     gender: 'Male' as 'Male' | 'Female' | 'Other',
     profession: '',
     email: '',
@@ -36,15 +34,26 @@ export class ServicesComponent implements OnInit {
 
   errors: { [K in keyof typeof this.form]?: string } = {};
   modalMessage: { type: 'success' | 'error'; text: string } | null = null;
+  isSubmitting = false;
+
+  // Success response data
+  generatedData: any = null;
 
   private razorpayLoaded = false;
 
-  constructor(private publicServices: PublicServicesService, private moneyCode: MoneyCodeService) {}
+  constructor(
+    private publicServices: PublicServicesService, 
+    private moneyCode: MoneyCodeService
+  ) {}
 
   ngOnInit(): void {
+    this.loadServices();
+  }
+
+  loadServices(): void {
+    this.isLoading = true;
     this.publicServices.getActiveServices().subscribe({
       next: (res) => {
-        // API may return either { data: PublicService[] } or { data: { docs: PublicService[] } }
         const payload: any = res as any;
         const docs: PublicService[] = payload?.data?.docs ?? payload?.data ?? [];
         this.services = Array.isArray(docs) ? docs : [];
@@ -81,16 +90,28 @@ export class ServicesComponent implements OnInit {
     this.selectedService = service;
     this.isModalOpen = true;
     this.loadRazorpayScript();
-    this.modalMessage = null;
+    this.resetForm();
   }
 
   closeModal(): void {
     this.isModalOpen = false;
-    // reset form and messages
-    this.form = { fullName: '', dateOfBirth: '', gender: 'Male', profession: '', email: '', phone: '' };
+    this.resetForm();
+    this.selectedService = null;
+    this.generatedData = null;
+  }
+
+  private resetForm(): void {
+    this.form = { 
+      fullName: '', 
+      dateOfBirth: '', 
+      gender: 'Male', 
+      profession: '', 
+      email: '', 
+      phone: '' 
+    };
     this.errors = {};
     this.modalMessage = null;
-    this.selectedService = null;
+    this.isSubmitting = false;
   }
 
   private loadRazorpayScript(): void {
@@ -101,18 +122,20 @@ export class ServicesComponent implements OnInit {
     document.body.appendChild(script);
   }
 
-  
-
   private onPaymentSuccess(resp: any): void {
     if (!this.selectedService) return;
+    
+    this.isSubmitting = true;
+    this.modalMessage = { type: 'success', text: '🔄 Processing your payment...' };
+
     const dobFormatted = this.moneyCode.formatDateToDDMMYYYY(this.form.dateOfBirth);
     const payload = {
-      fullName: this.form.fullName,
-      dateOfBirth: dobFormatted, // DD-MM-YYYY
+      fullName: this.form.fullName.trim(),
+      dateOfBirth: dobFormatted,
       gender: this.form.gender,
-      profession: this.form.profession,
-      email: this.form.email,
-      phone: this.form.phone,
+      profession: this.form.profession.trim(),
+      email: this.form.email.trim().toLowerCase(),
+      phone: this.form.phone.trim(),
       serviceId: this.selectedService._id,
       amountPaid: this.selectedService.price,
       paymentId: resp?.razorpay_payment_id || null,
@@ -120,31 +143,71 @@ export class ServicesComponent implements OnInit {
     };
 
     this.moneyCode.generateMoneyCode(payload as any).subscribe({
-      next: () => {
-        this.closeModal();
+      next: (response) => {
+        this.isSubmitting = false;
+        this.generatedData = response.data;
+        
+        this.modalMessage = { 
+          type: 'success', 
+          text: '✅ Success! Your Money Switch Code has been generated and sent to your email.' 
+        };
+        
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          this.closeModal();
+        }, 3000);
       },
-      error: () => {
-        this.closeModal();
+      error: (error) => {
+        this.isSubmitting = false;
+        this.modalMessage = { 
+          type: 'error', 
+          text: error?.error?.message || 'Something went wrong. Please try again.' 
+        };
       }
     });
   }
 
-  // Validate form and set inline error messages
   isFormValid(): boolean {
     this.errors = {};
+    let isValid = true;
+
+    // Full Name validation
     if (!this.form.fullName.trim()) {
       this.errors.fullName = 'Full name is required';
+      isValid = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(this.form.fullName)) {
+      this.errors.fullName = 'Only alphabets and spaces allowed';
+      isValid = false;
+    } else if (this.form.fullName.trim().length < 3) {
+      this.errors.fullName = 'Name must be at least 3 characters';
+      isValid = false;
     }
+
+    // Date of Birth validation - ACCEPTS ANY DATE (REMOVED RESTRICTIONS)
     if (!this.form.dateOfBirth) {
       this.errors.dateOfBirth = 'Date of birth is required';
+      isValid = false;
     }
-    if (!this.moneyCode.validateEmailFormat(this.form.email)) {
+
+    // Email validation
+    if (!this.form.email.trim()) {
+      this.errors.email = 'Email is required';
+      isValid = false;
+    } else if (!this.moneyCode.validateEmailFormat(this.form.email)) {
       this.errors.email = 'Enter a valid email address';
+      isValid = false;
     }
-    if (!this.moneyCode.validatePhoneFormat(this.form.phone)) {
+
+    // Phone validation
+    if (!this.form.phone.trim()) {
+      this.errors.phone = 'Phone number is required';
+      isValid = false;
+    } else if (!this.moneyCode.validatePhoneFormat(this.form.phone)) {
       this.errors.phone = 'Enter a valid 10-digit phone number';
+      isValid = false;
     }
-    return Object.keys(this.errors).length === 0;
+
+    return isValid;
   }
 
   sanitizePhoneInput(): void {
@@ -153,30 +216,55 @@ export class ServicesComponent implements OnInit {
 
   blockNonDigits(event: KeyboardEvent): void {
     const key = event.key;
-    // Allow control keys
     const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    
     if (allowed.includes(key)) return;
+    
     if (!/^[0-9]$/.test(key)) {
       event.preventDefault();
+      return;
     }
-    // Enforce 10 digits
+    
     if (this.form.phone && this.form.phone.length >= 10) {
       event.preventDefault();
     }
   }
 
+  onPhonePaste(event: ClipboardEvent): void {
+    event.preventDefault();
+    const pastedText = event.clipboardData?.getData('text') || '';
+    const numericOnly = pastedText.replace(/\D/g, '').slice(0, 10);
+    this.form.phone = numericOnly;
+  }
+
+  blockNonAlphabets(event: KeyboardEvent): void {
+    const key = event.key;
+    const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab', ' '];
+    
+    if (allowed.includes(key)) return;
+    
+    if (!/^[a-zA-Z]$/.test(key)) {
+      event.preventDefault();
+    }
+  }
+
   canPay(): boolean {
-    const nameOk = !!this.form.fullName.trim();
+    if (this.isSubmitting) return false;
+    
+    const nameOk = !!this.form.fullName.trim() && 
+                   /^[a-zA-Z\s]+$/.test(this.form.fullName) &&
+                   this.form.fullName.trim().length >= 3;
     const dobOk = !!this.form.dateOfBirth;
     const emailOk = this.moneyCode.validateEmailFormat(this.form.email);
     const phoneOk = this.moneyCode.validatePhoneFormat(this.form.phone);
+    
     return nameOk && dobOk && emailOk && phoneOk;
   }
 
-  // Re-add payNow to launch Razorpay when form is valid
   payNow(): void {
-    if (!this.selectedService) return;
+    if (!this.selectedService || this.isSubmitting) return;
     if (!this.isFormValid()) return;
+
     const amountPaise = Math.max(1, Math.round((this.selectedService.price || 0) * 100));
 
     const options: any = {
@@ -187,13 +275,37 @@ export class ServicesComponent implements OnInit {
       description: this.selectedService.title,
       image: this.getImageUrl(this.selectedService.image),
       handler: (response: any) => this.onPaymentSuccess(response),
-      prefill: { name: this.form.fullName, email: this.form.email, contact: this.form.phone },
+      prefill: { 
+        name: this.form.fullName, 
+        email: this.form.email, 
+        contact: this.form.phone 
+      },
       theme: { color: '#560591' },
+      modal: {
+        ondismiss: () => {
+          this.isSubmitting = false;
+        }
+      }
     };
 
     const rzCtor = (window as any).Razorpay;
-    if (!rzCtor) return;
+    if (!rzCtor) {
+      this.modalMessage = { 
+        type: 'error', 
+        text: 'Payment gateway not loaded. Please refresh and try again.' 
+      };
+      return;
+    }
+    
     const rz = new rzCtor(options);
     rz.open();
+  }
+
+  // Download PDF Report
+  downloadReport(): void {
+    if (this.generatedData?.reportUrl) {
+      const reportUrl = this.moneyCode.getReportUrl(this.generatedData.reportUrl);
+      window.open(reportUrl, '_blank');
+    }
   }
 }
