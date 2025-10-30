@@ -1,0 +1,51 @@
+@keyframes floatSlow {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+  50%  { transform: translateY(-8px) rotate(3deg); opacity: 1; }
+  100% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+}
+
+.float-icon {
+  animation: floatSlow 4.5s ease-in-out infinite;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.18));
+}
+
+@media (max-width: 767px) {
+  .float-icon { display: none; }
+}
+
+/* Badge wrapper to increase visibility for mostly white icons */
+.float-wrap {
+  background: transparent; /* no background */
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  z-index: 2;
+}
+
+/* Decorative corners on image */
+.corner {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  z-index: 1;
+}
+
+.corner-tl {
+  top: -10px;
+  left: -10px;
+  border-top: 4px solid #560591; /* brand */
+  border-left: 4px solid #560591;
+  border-top-left-radius: 14px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+}
+
+.corner-br {
+  right: -10px;
+  bottom: -10px;
+  border-bottom: 4px solid #560591;
+  border-right: 4px solid #560591;
+  border-bottom-right-radius: 14px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+}
+
