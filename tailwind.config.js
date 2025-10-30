@@ -53,6 +53,9 @@ module.exports = {
           900: '#312e81',
           950: '#1e1b4b', // Very dark indigo for headers
         },
+
+        // ✅ Brand color (client-requested indigo/purple)
+        'brand': '#560591',
       },
     },
   },

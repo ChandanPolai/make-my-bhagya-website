@@ -49,6 +49,41 @@ export class HeroComponent implements OnInit {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  closeMenu() {
+    this.isMenuOpen = false;
+  }
+
+  onNavClick(event: Event, section: 'home' | 'about' | 'services' | 'testimonials', fromDrawer: boolean = false) {
+    event.preventDefault();
+    if (fromDrawer) {
+      this.closeMenu();
+      // Delay to allow drawer close animation before scrolling
+      setTimeout(() => this.scrollToSection(section), 180);
+    } else {
+      this.scrollToSection(section);
+    }
+  }
+
+  private scrollToSection(section: 'home' | 'about' | 'services' | 'testimonials') {
+    const headerOffset = 80; // approximate sticky header height
+    if (section === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    let selector = '';
+    if (section === 'about') selector = 'app-about';
+    if (section === 'services') selector = 'app-services';
+    if (section === 'testimonials') selector = 'app-testimonials';
+
+    const el = document.querySelector(selector) as HTMLElement | null;
+    if (!el) return;
+
+    const elementTop = el.getBoundingClientRect().top + window.pageYOffset;
+    const offsetTop = elementTop - headerOffset;
+    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+  }
+
   nextSlide() {
     this.swiperRef.nativeElement.swiper.slideNext();
   }

@@ -1,33 +1,25 @@
-<!-- Social Header Top Bar -->
-<div class="tw-bg-indigo-950 tw-text-white tw-py-2 tw-border-b tw-border-gold-500/30">
+<!-- Social Header Top Bar (hidden on small screens) -->
+<div class="tw-hidden md:tw-block tw-bg-brand tw-text-white tw-py-3 tw-border-b tw-border-yellow-500/30">
   <div class="tw-container tw-mx-auto tw-px-4">
-    <div class="tw-flex tw-flex-wrap tw-justify-between tw-items-center tw-text-sm">
+    <div class="tw-flex tw-flex-wrap tw-justify-between tw-items-center tw-text-base md:tw-text-lg">
       <!-- Left Side - Contact Info -->
-      <div class="tw-flex tw-flex-wrap tw-gap-4 tw-items-center">
-        <div class="tw-flex tw-items-center tw-gap-2">
+      <div class="tw-flex tw-flex-wrap tw-gap-6 tw-items-center">
+        <div class="tw-flex tw-items-center tw-gap-3">
           <i class="fas fa-phone-alt tw-text-yellow-400"></i>
           <span>+91 96622 35593</span>
         </div>
-        <div class="tw-flex tw-items-center tw-gap-2">
+        <div class="tw-flex tw-items-center tw-gap-3">
           <i class="fas fa-envelope tw-text-yellow-400"></i>
-<span>info&#64;makemybhagya.com</span>
+          <span>info&#64;makemybhagya.com</span>
         </div>
       </div>
       
       <!-- Right Side - Social Icons -->
-      <div class="tw-flex tw-gap-3 tw-items-center">
-        <a href="#" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="#" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="#" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300">
-          <i class="fab fa-instagram"></i>
-        </a>
+      <div class="tw-flex tw-gap-4 tw-items-center tw-text-xl md:tw-text-2xl">
+        <a href="#" aria-label="WhatsApp" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" aria-label="Instagram" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Facebook" class="tw-text-white hover:tw-text-yellow-400 tw-transition-colors tw-duration-300"><i class="fab fa-facebook-f"></i></a>
       </div>
     </div>
   </div>
@@ -40,55 +32,48 @@
       
       <!-- Logo -->
       <div class="tw-flex tw-items-center">
-        <div class="tw-w-12 tw-h-12 tw-bg-gradient-to-br tw-from-indigo-600 tw-to-purple-600 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-shadow-lg">
-          <span class="tw-text-white tw-font-bold tw-text-xl">MMB</span>
-        </div>
-        <div class="tw-ml-3">
-          <h1 class="tw-text-xl tw-font-bold tw-text-indigo-900">Make My Bhagya</h1>
-          <p class="tw-text-xs tw-text-gray-600">Numerology Portal</p>
-        </div>
+        <img src="../../../../assets/logo/mmb.jpg" alt="Logo" class="tw-h-12 md:tw-h-14 tw-w-auto tw-rounded-md tw-shadow-md" />
       </div>
 
       <!-- Desktop Menu -->
-      <div class="tw-hidden lg:tw-flex tw-items-center tw-space-x-8">
-        <a href="#home" class="tw-text-gray-700 hover:tw-text-indigo-600 tw-font-medium tw-transition-colors tw-duration-300 tw-relative tw-group">
-          Home
-          <span class="tw-absolute tw-bottom-0 tw-left-0 tw-w-0 tw-h-0.5 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-indigo-600 group-hover:tw-w-full tw-transition-all tw-duration-300"></span>
-        </a>
-        <a href="#about" class="tw-text-gray-700 hover:tw-text-indigo-600 tw-font-medium tw-transition-colors tw-duration-300 tw-relative tw-group">
-          About Us
-          <span class="tw-absolute tw-bottom-0 tw-left-0 tw-w-0 tw-h-0.5 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-indigo-600 group-hover:tw-w-full tw-transition-all tw-duration-300"></span>
-        </a>
-        <a href="#services" class="tw-text-gray-700 hover:tw-text-indigo-600 tw-font-medium tw-transition-colors tw-duration-300 tw-relative tw-group">
-          Services
-          <span class="tw-absolute tw-bottom-0 tw-left-0 tw-w-0 tw-h-0.5 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-indigo-600 group-hover:tw-w-full tw-transition-all tw-duration-300"></span>
-        </a>
-        <a href="#testimonials" class="tw-text-gray-700 hover:tw-text-indigo-600 tw-font-medium tw-transition-colors tw-duration-300 tw-relative tw-group">
-          Testimonials
-          <span class="tw-absolute tw-bottom-0 tw-left-0 tw-w-0 tw-h-0.5 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-indigo-600 group-hover:tw-w-full tw-transition-all tw-duration-300"></span>
-        </a>
+      <div class="tw-hidden lg:tw-flex tw-items-center tw-space-x-6 tw-text-lg">
+        <a href="#home" (click)="onNavClick($event, 'home')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Home</a>
+        <a href="#about" (click)="onNavClick($event, 'about')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">About Us</a>
+        <a href="#services" (click)="onNavClick($event, 'services')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Services</a>
+        <a href="#testimonials" (click)="onNavClick($event, 'testimonials')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Testimonials</a>
         
         <!-- CTA Button -->
-        <button class="tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-2.5 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+        <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-3 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
           Get Your Bhagya
         </button>
       </div>
 
       <!-- Mobile Menu Button -->
       <button (click)="toggleMenu()" class="lg:tw-hidden tw-text-gray-700 tw-focus:outline-none">
-        <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'" class="tw-text-2xl"></i>
+        <i class="fas tw-text-3xl" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
       </button>
     </div>
 
-    <!-- Mobile Menu -->
-    <div *ngIf="isMenuOpen" class="lg:tw-hidden tw-pb-4 tw-border-t tw-border-gray-200 tw-mt-2 tw-animate-slideDown">
-      <a href="#home" class="tw-block tw-py-3 tw-text-gray-700 hover:tw-text-indigo-600 hover:tw-bg-indigo-50 tw-px-4 tw-rounded tw-transition-colors tw-duration-300">Home</a>
-      <a href="#about" class="tw-block tw-py-3 tw-text-gray-700 hover:tw-text-indigo-600 hover:tw-bg-indigo-50 tw-px-4 tw-rounded tw-transition-colors tw-duration-300">About Us</a>
-      <a href="#services" class="tw-block tw-py-3 tw-text-gray-700 hover:tw-text-indigo-600 hover:tw-bg-indigo-50 tw-px-4 tw-rounded tw-transition-colors tw-duration-300">Services</a>
-      <a href="#testimonials" class="tw-block tw-py-3 tw-text-gray-700 hover:tw-text-indigo-600 hover:tw-bg-indigo-50 tw-px-4 tw-rounded tw-transition-colors tw-duration-300">Testimonials</a>
-      <button class="tw-w-full tw-mt-3 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-3 tw-rounded-full tw-shadow-lg">
-        Get Your Bhagya
-      </button>
+    <!-- Mobile Drawer & Overlay -->
+    <div *ngIf="isMenuOpen" class="lg:tw-hidden">
+      <!-- overlay -->
+      <div class="tw-fixed tw-inset-0 tw-bg-black/40 tw-z-40" (click)="closeMenu()"></div>
+      <!-- drawer -->
+      <div class="tw-fixed tw-top-0 tw-left-0 tw-h-full tw-w-72 tw-bg-white tw-z-50 tw-shadow-2xl tw-transform tw-animate-slideInLeft">
+        <div class="tw-flex tw-items-center tw-justify-between tw-px-4 tw-py-4 tw-border-b tw-border-gray-200">
+          <div class="tw-flex tw-items-center">
+            <img src="../../../../assets/logo/mmb.jpg" alt="Logo" class="tw-h-10 tw-w-auto tw-rounded tw-shadow" />
+          </div>
+          <button (click)="closeMenu()" class="tw-text-gray-600"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="tw-px-2 tw-pt-2">
+          <a href="#home" (click)="onNavClick($event, 'home', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Home</a>
+          <a href="#about" (click)="onNavClick($event, 'about', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">About Us</a>
+          <a href="#services" (click)="onNavClick($event, 'services', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Services</a>
+          <a href="#testimonials" (click)="onNavClick($event, 'testimonials', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Testimonials</a>
+          <button class="btn-shimmer tw-w-full tw-mt-4 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-3 tw-rounded-full tw-shadow-lg">Get Your Bhagya</button>
+        </nav>
+      </div>
     </div>
   </div>
 </nav>
@@ -98,7 +83,7 @@
   <swiper-container
     #swiper
     [config]="swiperConfig"
-    class="tw-w-full tw-h-[500px] md:tw-h-[600px] lg:tw-h-[700px]"
+    class="tw-w-full tw-h-[520px] md:tw-h-[640px] lg:tw-h-[720px]"
   >
     <!-- Slide 1 -->
     <swiper-slide>
@@ -111,13 +96,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-indigo-900/80 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center">
             <div class="tw-max-w-2xl tw-text-white tw-animate-fadeInLeft">
-              <h1 class="tw-text-4xl md:tw-text-6xl tw-font-bold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
                 Unlock Your <span class="tw-text-yellow-400">Money Switch</span> Code
               </h1>
-              <p class="tw-text-lg md:tw-text-xl tw-mb-8 tw-text-gray-200">
+              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
                 Discover your personalized numerology-based wealth codes
               </p>
-              <button class="tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Generate Your Code Now
               </button>
             </div>
@@ -137,13 +122,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-l tw-from-purple-900/80 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center tw-justify-end">
             <div class="tw-max-w-2xl tw-text-white tw-text-right tw-animate-fadeInRight">
-              <h1 class="tw-text-4xl md:tw-text-6xl tw-font-bold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
                 Transform Your <span class="tw-text-yellow-400">Financial Destiny</span>
               </h1>
-              <p class="tw-text-lg md:tw-text-xl tw-mb-8 tw-text-gray-200">
+              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
                 Ancient numerology meets modern wealth manifestation
               </p>
-              <button class="tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Start Your Journey
               </button>
             </div>
@@ -163,13 +148,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-indigo-900/90 tw-via-indigo-900/50 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center tw-justify-center">
             <div class="tw-max-w-3xl tw-text-white tw-text-center tw-animate-fadeInUp">
-              <h1 class="tw-text-4xl md:tw-text-6xl tw-font-bold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
                 Your Personalized <span class="tw-text-yellow-400">Wealth Blueprint</span>
               </h1>
-              <p class="tw-text-lg md:tw-text-xl tw-mb-8 tw-text-gray-200">
+              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
                 Get your custom Money Switch Code report in minutes
               </p>
-              <button class="tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Claim Your Report
               </button>
             </div>
@@ -189,13 +174,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-yellow-900/80 tw-to-indigo-900/80">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center">
             <div class="tw-max-w-2xl tw-text-white tw-animate-fadeInLeft">
-              <h1 class="tw-text-4xl md:tw-text-6xl tw-font-bold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
                 <span class="tw-text-yellow-400">108 Days</span> to Financial Freedom
               </h1>
-              <p class="tw-text-lg md:tw-text-xl tw-mb-8 tw-text-gray-200">
+              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
                 Follow ancient rituals backed by numerological science
               </p>
-              <button class="tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Begin Transformation
               </button>
             </div>
