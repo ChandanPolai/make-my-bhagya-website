@@ -28,30 +28,33 @@
 <!-- Professional Animated Navbar -->
 <nav class="tw-bg-white tw-shadow-lg tw-sticky tw-top-0 tw-z-50 tw-transition-all tw-duration-300" [class.tw-shadow-2xl]="isScrolled">
   <div class="tw-container tw-mx-auto tw-px-4">
-    <div class="tw-flex tw-justify-between tw-items-center tw-py-4">
+    <div class="tw-relative tw-flex tw-items-center tw-justify-between tw-py-4">
       
       <!-- Logo -->
-      <div class="tw-flex tw-items-center">
+      <div class="tw-flex tw-items-center tw-col-start-1 tw-justify-start">
         <img src="../../../../assets/logo/mmb.jpg" alt="Logo" class="tw-h-12 md:tw-h-14 tw-w-auto tw-rounded-md tw-shadow-md" />
       </div>
 
-      <!-- Desktop Menu -->
-      <div class="tw-hidden lg:tw-flex tw-items-center tw-space-x-6 tw-text-lg">
+      <!-- Desktop Menu (center absolute) -->
+      <div class="tw-hidden lg:tw-flex tw-absolute tw-left-1/2 tw-top-1/2 tw--translate-x-1/2 tw--translate-y-1/2 tw-items-center tw-space-x-8 tw-text-xl">
         <a href="#home" (click)="onNavClick($event, 'home')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Home</a>
         <a href="#about" (click)="onNavClick($event, 'about')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">About Us</a>
         <a href="#services" (click)="onNavClick($event, 'services')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Services</a>
         <a href="#testimonials" (click)="onNavClick($event, 'testimonials')" class="tw-no-underline tw-text-gray-700 hover:tw-text-brand tw-font-semibold tw-transition-colors tw-duration-300 tw-px-2 tw-py-1 tw-rounded hover:tw-bg-indigo-50">Testimonials</a>
         
         <!-- CTA Button -->
-        <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-3 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
-          Get Your Bhagya
-        </button>
+        
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button (click)="toggleMenu()" class="lg:tw-hidden tw-text-gray-700 tw-focus:outline-none">
-        <i class="fas tw-text-3xl" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
-      </button>
+      <!-- Right actions: CTA (desktop) + Hamburger (mobile) -->
+      <div class="tw-flex tw-items-center tw-justify-end tw-space-x-3">
+        <button class="btn-shimmer tw-hidden lg:tw-inline-flex tw-items-center tw-justify-center tw-min-w-[220px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-8 tw-py-3.5 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+          Get Your Bhagya
+        </button>
+        <button (click)="toggleMenu()" class="lg:tw-hidden tw-text-gray-700 tw-focus:outline-none">
+          <i class="fas tw-text-3xl" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'"></i>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile Drawer & Overlay -->
@@ -67,11 +70,11 @@
           <button (click)="closeMenu()" class="tw-text-gray-600"><i class="fas fa-times"></i></button>
         </div>
         <nav class="tw-px-2 tw-pt-2">
-          <a href="#home" (click)="onNavClick($event, 'home', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Home</a>
-          <a href="#about" (click)="onNavClick($event, 'about', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">About Us</a>
-          <a href="#services" (click)="onNavClick($event, 'services', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Services</a>
-          <a href="#testimonials" (click)="onNavClick($event, 'testimonials', true)" class="tw-block tw-py-3 tw-px-3 tw-rounded tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-medium">Testimonials</a>
-          <button class="btn-shimmer tw-w-full tw-mt-4 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-6 tw-py-3 tw-rounded-full tw-shadow-lg">Get Your Bhagya</button>
+          <a href="#home" (click)="onNavClick($event, 'home', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">Home</a>
+          <a href="#about" (click)="onNavClick($event, 'about', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">About Us</a>
+          <a href="#services" (click)="onNavClick($event, 'services', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">Services</a>
+          <a href="#testimonials" (click)="onNavClick($event, 'testimonials', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">Testimonials</a>
+          <button class="btn-shimmer tw-w-full tw-mt-4 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-6 tw-py-3.5 tw-rounded-full tw-shadow-lg">Get Your Bhagya</button>
         </nav>
       </div>
     </div>
@@ -96,13 +99,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-indigo-900/80 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center">
             <div class="tw-max-w-2xl tw-text-white tw-animate-fadeInLeft">
-              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-6xl md:tw-text-8xl tw-font-extrabold tw-mb-5 tw-leading-tight">
                 Unlock Your <span class="tw-text-yellow-400">Money Switch</span> Code
               </h1>
-              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
+              <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Discover your personalized numerology-based wealth codes
               </p>
-              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Generate Your Code Now
               </button>
             </div>
@@ -122,13 +125,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-l tw-from-purple-900/80 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center tw-justify-end">
             <div class="tw-max-w-2xl tw-text-white tw-text-right tw-animate-fadeInRight">
-              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-6xl md:tw-text-8xl tw-font-extrabold tw-mb-5 tw-leading-tight">
                 Transform Your <span class="tw-text-yellow-400">Financial Destiny</span>
               </h1>
-              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
+              <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Ancient numerology meets modern wealth manifestation
               </p>
-              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Start Your Journey
               </button>
             </div>
@@ -148,13 +151,13 @@
         <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-indigo-900/90 tw-via-indigo-900/50 tw-to-transparent">
           <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center tw-justify-center">
             <div class="tw-max-w-3xl tw-text-white tw-text-center tw-animate-fadeInUp">
-              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
+              <h1 class="tw-text-6xl md:tw-text-8xl tw-font-extrabold tw-mb-5 tw-leading-tight">
                 Your Personalized <span class="tw-text-yellow-400">Wealth Blueprint</span>
               </h1>
-              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
+              <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Get your custom Money Switch Code report in minutes
               </p>
-              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Claim Your Report
               </button>
             </div>
@@ -163,31 +166,7 @@
       </div>
     </swiper-slide>
 
-    <!-- Slide 4 -->
-    <swiper-slide>
-      <div class="tw-relative tw-w-full tw-h-full">
-        <img 
-          src="../../../../assets/bannerimages/numrology4.jpg" 
-          alt="Numerology Banner 4"
-          class="tw-w-full tw-h-full tw-object-cover"
-        />
-        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-r tw-from-yellow-900/80 tw-to-indigo-900/80">
-          <div class="tw-container tw-mx-auto tw-px-4 tw-h-full tw-flex tw-items-center">
-            <div class="tw-max-w-2xl tw-text-white tw-animate-fadeInLeft">
-              <h1 class="tw-text-5xl md:tw-text-7xl tw-font-extrabold tw-mb-4 tw-leading-tight">
-                <span class="tw-text-yellow-400">108 Days</span> to Financial Freedom
-              </h1>
-              <p class="tw-text-xl md:tw-text-2xl tw-mb-10 tw-text-gray-200">
-                Follow ancient rituals backed by numerological science
-              </p>
-              <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-font-bold tw-px-8 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
-                Begin Transformation
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </swiper-slide>
+    <!-- Slide 4 removed per request -->
   </swiper-container>
 
   <!-- Custom Navigation Buttons -->
