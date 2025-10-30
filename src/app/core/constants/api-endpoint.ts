@@ -35,6 +35,10 @@ class ApiEndpoints {
   // ==================== WEBSITE MANAGEMENT ====================
   public GET_WEBSITE_DETAILS: string = `${this.PATH}/website/get`;
   public UPDATE_WEBSITE_DETAILS: string = `${this.PATH}/website/update`;
+
+// ==================== PUBLIC ROUTES (NO AUTH) ====================
+public GET_PUBLIC_SERVICES: string = `${this.PATH}/services/list`;
+
 }
 
 export let apiEndpoints = new ApiEndpoints();
