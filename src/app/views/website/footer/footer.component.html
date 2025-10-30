@@ -1,55 +1,109 @@
-<footer class="tw-bg-brand tw-text-white tw-pt-16">
-  <div class="tw-container tw-mx-auto tw-px-4">
-    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-4 tw-gap-10">
-      <!-- Brand / About -->
-      <div>
-        <div class="tw-flex tw-items-center tw-gap-3">
-          <img src="../../../../assets/logo/mmb.jpg" alt="MMB" class="tw-w-12 tw-h-12 tw-rounded-md tw-shadow" />
-          <span class="tw-font-extrabold tw-text-xl">Make My Bhagya</span>
+<footer class="tw-bg-brand tw-text-white tw-py-16 tw-px-4 md:tw-py-20">
+  <div class="tw-container tw-mx-auto tw-max-w-7xl">
+    <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-4 tw-gap-8 md:tw-gap-12">
+      
+      <!-- Brand / About Section -->
+      <div class="tw-space-y-4">
+        <div class="tw-flex tw-items-center tw-gap-3 tw-mb-5">
+          <img src="../../../../assets/logo/mmb.jpg" alt="MMB Logo" class="tw-w-12 tw-h-12 tw-rounded-lg tw-shadow-lg tw-object-cover" />
+          <span class="tw-font-bold tw-text-lg md:tw-text-xl tw-text-yellow-300">Make My Bhagya</span>
         </div>
-        <p class="tw-mt-4 tw-text-white/90 tw-text-lg">
+        <p class="tw-text-gray-200 tw-text-sm md:tw-text-base tw-leading-relaxed">
           Numerology-guided Money Switch Codes and simple daily rituals to align your actions with abundance.
         </p>
       </div>
 
-      <!-- Quick Links -->
-      <div>
-        <h4 class="tw-font-extrabold tw-text-2xl">Quick Links</h4>
-        <ul class="tw-mt-4 tw-space-y-2">
-          <li><a href="#home" (click)="$event.preventDefault(); navigate('home')" class="tw-text-white/90 hover:tw-text-yellow-300">Home</a></li>
-          <li><a href="#about" (click)="$event.preventDefault(); navigate('about')" class="tw-text-white/90 hover:tw-text-yellow-300">About</a></li>
-          <li><a href="#services" (click)="$event.preventDefault(); navigate('services')" class="tw-text-white/90 hover:tw-text-yellow-300">Services</a></li>
-          <li><a href="#testimonials" (click)="$event.preventDefault(); navigate('testimonials')" class="tw-text-white/90 hover:tw-text-yellow-300">Testimonials</a></li>
+      <!-- Quick Links Section -->
+      <div class="tw-space-y-4">
+        <h4 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-text-yellow-300 tw-mb-5">Quick Links</h4>
+        <ul class="tw-space-y-3">
+          <li>
+            <a href="#home" 
+               (click)="$event.preventDefault(); navigate('home')" 
+               class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300 tw-text-sm md:tw-text-base tw-inline-block">
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="#about" 
+               (click)="$event.preventDefault(); navigate('about')" 
+               class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300 tw-text-sm md:tw-text-base tw-inline-block">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#services" 
+               (click)="$event.preventDefault(); navigate('services')" 
+               class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300 tw-text-sm md:tw-text-base tw-inline-block">
+              Services
+            </a>
+          </li>
+          <li>
+            <a href="#testimonials" 
+               (click)="$event.preventDefault(); navigate('testimonials')" 
+               class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300 tw-text-sm md:tw-text-base tw-inline-block">
+              Testimonials
+            </a>
+          </li>
         </ul>
       </div>
 
-      <!-- Contact -->
-      <div>
-        <h4 class="tw-font-extrabold tw-text-2xl">Contact</h4>
-        <ul class="tw-mt-4 tw-space-y-3 tw-text-white/90 tw-text-lg">
-          <li><i class="fas fa-phone-alt tw-mr-2"></i> +91 96622 35593</li>
-          <li><i class="fas fa-envelope tw-mr-2"></i> info&#64;makemybhagya.com</li>
-          <li><i class="fas fa-map-marker-alt tw-mr-2"></i> Ahmedabad, Gujarat</li>
+      <!-- Contact Section -->
+      <div class="tw-space-y-4">
+        <h4 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-text-yellow-300 tw-mb-5">Contact</h4>
+        <ul class="tw-space-y-4">
+          <li class="tw-flex tw-items-start tw-gap-3 tw-text-gray-200">
+            <i class="fas fa-phone-alt tw-text-yellow-300 tw-mt-1 tw-text-sm"></i>
+            <span class="tw-text-sm md:tw-text-base">+91 96622 35593</span>
+          </li>
+          <li class="tw-flex tw-items-start tw-gap-3 tw-text-gray-200">
+            <i class="fas fa-envelope tw-text-yellow-300 tw-mt-1 tw-text-sm"></i>
+            <a href="mailto:info@makemybhagya.com" class="tw-text-sm md:tw-text-base hover:tw-text-yellow-300 tw-transition-colors tw-break-all">
+info&#64;makemybhagya.com            </a>
+          </li>
+          <li class="tw-flex tw-items-start tw-gap-3 tw-text-gray-200">
+            <i class="fas fa-map-marker-alt tw-text-yellow-300 tw-mt-1 tw-text-sm"></i>
+            <span class="tw-text-sm md:tw-text-base">Ahmedabad, Gujarat</span>
+          </li>
         </ul>
       </div>
 
-      <!-- Social -->
-      <div>
-        <h4 class="tw-font-extrabold tw-text-2xl">Follow</h4>
-        <div class="tw-mt-4 tw-flex tw-gap-4">
-          <a href="#" aria-label="WhatsApp" class="tw-w-12 tw-h-12 tw-rounded-full tw-bg-white/10 hover:tw-bg-white/20 tw-flex tw-items-center tw-justify-center"><i class="fab fa-whatsapp"></i></a>
-          <a href="#" aria-label="Instagram" class="tw-w-12 tw-h-12 tw-rounded-full tw-bg-white/10 hover:tw-bg-white/20 tw-flex tw-items-center tw-justify-center"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="YouTube" class="tw-w-12 tw-h-12 tw-rounded-full tw-bg-white/10 hover:tw-bg-white/20 tw-flex tw-items-center tw-justify-center"><i class="fab fa-youtube"></i></a>
-          <a href="#" aria-label="Facebook" class="tw-w-12 tw-h-12 tw-rounded-full tw-bg-white/10 hover:tw-bg-white/20 tw-flex tw-items-center tw-justify-center"><i class="fab fa-facebook-f"></i></a>
+      <!-- Social Media Section -->
+      <div class="tw-space-y-4">
+        <h4 class="tw-font-bold tw-text-xl md:tw-text-2xl tw-text-yellow-300 tw-mb-5">Follow Us</h4>
+        <div class="tw-flex tw-flex-wrap tw-gap-3 md:tw-gap-4">
+          <a href="#" 
+             aria-label="WhatsApp" 
+             class="tw-w-11 tw-h-11 md:tw-w-12 md:tw-h-12 tw-rounded-full tw-bg-white tw-flex tw-items-center tw-justify-center tw-shadow-lg hover:tw-shadow-xl hover:tw-scale-110 tw-transition-all tw-duration-300 hover:tw-bg-yellow-300">
+            <i class="fab fa-whatsapp tw-text-brand tw-text-xl"></i>
+          </a>
+          <a href="#" 
+             aria-label="Instagram" 
+             class="tw-w-11 tw-h-11 md:tw-w-12 md:tw-h-12 tw-rounded-full tw-bg-white tw-flex tw-items-center tw-justify-center tw-shadow-lg hover:tw-shadow-xl hover:tw-scale-110 tw-transition-all tw-duration-300 hover:tw-bg-yellow-300">
+            <i class="fab fa-instagram tw-text-brand tw-text-xl"></i>
+          </a>
+          <a href="#" 
+             aria-label="YouTube" 
+             class="tw-w-11 tw-h-11 md:tw-w-12 md:tw-h-12 tw-rounded-full tw-bg-white tw-flex tw-items-center tw-justify-center tw-shadow-lg hover:tw-shadow-xl hover:tw-scale-110 tw-transition-all tw-duration-300 hover:tw-bg-yellow-300">
+            <i class="fab fa-youtube tw-text-brand tw-text-xl"></i>
+          </a>
+          <a href="#" 
+             aria-label="Facebook" 
+             class="tw-w-11 tw-h-11 md:tw-w-12 md:tw-h-12 tw-rounded-full tw-bg-white tw-flex tw-items-center tw-justify-center tw-shadow-lg hover:tw-shadow-xl hover:tw-scale-110 tw-transition-all tw-duration-300 hover:tw-bg-yellow-300">
+            <i class="fab fa-facebook-f tw-text-brand tw-text-xl"></i>
+          </a>
         </div>
       </div>
     </div>
 
-    <div class="tw-border-t tw-border-white/20 tw-mt-12 tw-pt-8 tw-pb-12 tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between">
-      <p class="tw-text-white/80">© {{ currentYear }} Make My Bhagya. All rights reserved.</p>
-      <div class="tw-mt-3 md:tw-mt-0 tw-space-x-4">
-        <a href="#" class="tw-text-white/80 hover:tw-text-yellow-300">Terms</a>
-        <a href="#" class="tw-text-white/80 hover:tw-text-yellow-300">Privacy</a>
+    <!-- Bottom Bar -->
+    <div class="tw-border-t tw-border-gray-200/20 tw-mt-12 tw-pt-8 tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-gap-4">
+      <p class="tw-text-gray-300 tw-text-sm md:tw-text-base tw-text-center md:tw-text-left">
+        © {{ currentYear }} Make My Bhagya. All rights reserved.
+      </p>
+      <div class="tw-flex tw-gap-6 tw-text-sm md:tw-text-base">
+        <a href="#" class="tw-text-gray-300 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300">Terms</a>
+        <a href="#" class="tw-text-gray-300 hover:tw-text-yellow-300 tw-transition-colors tw-duration-300">Privacy</a>
       </div>
     </div>
   </div>
