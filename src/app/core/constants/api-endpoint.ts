@@ -36,7 +36,7 @@ class ApiEndpoints {
   public UPDATE_WEBSITE_DETAILS: string = `${this.PATH}/website/update`;
 
 // ==================== PUBLIC ROUTES (NO AUTH) ====================
-public GET_PUBLIC_SERVICES: string = `${this.PATH}/services/list`;
+public GET_PUBLIC_SERVICES: string = `${this.PATH}/public/services/list`;
 public GENERATE_MONEY_CODE: string = `${this.PATH}/money-switch/generate`;
 
 
