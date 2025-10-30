@@ -20,7 +20,7 @@ export class TestimonialsComponent {
       role: 'Entrepreneur',
       text:
         'I followed the Money Switch Code rituals for 45 days. Sales picked up, I closed two big clients, and more importantly my daily decision-making became calmer and sharper. The plan is simple and practical — it removed the guesswork from what to do next.',
-      avatar: 'https://www.entrepreneur.com/wp-content/uploads/sites/2/2024/07/1720530731-ent24-julyaugust-franchisee-mw.jpg?resize=500,282',
+      avatar: 'https://images.deccanchronicle.com/dc-Cover-ftsq2549l0te2muroimde5sgr3-20161223232107.Medi.jpeg',
       rating: 5,
     },
     {
@@ -28,7 +28,7 @@ export class TestimonialsComponent {
       role: 'Designer',
       text:
         'Beautifully designed report with clear, actionable steps. Within a month I felt more aligned and confident about my finances. The daily code routine is short but powerful and fits easily into my morning schedule.',
-      avatar: 'https://www.entrepreneur.com/wp-content/uploads/sites/2/2024/07/1720530731-ent24-julyaugust-franchisee-mw.jpg?resize=500,282',
+      avatar: 'https://in.bmscdn.com/iedb/artist/images/website/poster/large/ishita-dutta-33120-24-03-2017-17-56-45.jpg',
       rating: 5,
     },
     {
@@ -36,7 +36,7 @@ export class TestimonialsComponent {
       role: 'Consultant',
       text:
         'Skeptical at first, but the numerology mapping made practical sense. Cashflow stabilized after I implemented the daily code and weekly ritual. It gave me a rhythm — small, consistent actions that added up.',
-      avatar: 'https://www.entrepreneur.com/wp-content/uploads/sites/2/2024/07/1720530731-ent24-julyaugust-franchisee-mw.jpg?resize=500,282',
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6i_01xwQrEgJgCKVInV7GS3HaUHcppVujfg&s',
       rating: 4,
     },
     {
@@ -44,7 +44,7 @@ export class TestimonialsComponent {
       role: 'Freelancer',
       text:
         'The personalized codes and doables were surprisingly simple. I loved the clarity and the personal examples in the report. I refer to it before important calls to keep my energy clean and focused.',
-      avatar: 'https://www.entrepreneur.com/wp-content/uploads/sites/2/2024/07/1720530731-ent24-julyaugust-franchisee-mw.jpg?resize=500,282',
+      avatar: 'https://media.licdn.com/dms/image/v2/D4E03AQH3ONUbWGtu8Q/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1647406418251?e=2147483647&v=beta&t=1Eem_gFkv5JM146aXRcRJcm-zfkxo_PIuuTla5C7VMg',
       rating: 5,
     },
   ];

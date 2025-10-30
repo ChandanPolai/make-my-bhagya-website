@@ -4,14 +4,21 @@
     <div class="tw-flex tw-flex-wrap tw-justify-between tw-items-center tw-text-base md:tw-text-lg">
       <!-- Left Side - Contact Info -->
       <div class="tw-flex tw-flex-wrap tw-gap-6 tw-items-center">
-        <div class="tw-flex tw-items-center tw-gap-3">
-          <i class="fas fa-phone-alt tw-text-yellow-400"></i>
-          <span>+91 96622 35593</span>
-        </div>
-        <div class="tw-flex tw-items-center tw-gap-3">
-          <i class="fas fa-envelope tw-text-yellow-400"></i>
-          <span>info&#64;makemybhagya.com</span>
-        </div>
+       <div class="tw-flex tw-items-center tw-gap-3">
+  <i class="fas fa-phone-alt tw-text-yellow-400"></i>
+  <a href="tel:+919662235593" 
+     class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-no-underline">
+     +91 96622 35593
+  </a>
+</div>
+
+<div class="tw-flex tw-items-center tw-gap-3">
+  <i class="fas fa-envelope tw-text-yellow-400"></i>
+  <a href="mailto:info@makemybhagya.com" 
+     class="tw-text-gray-200 hover:tw-text-yellow-300 tw-transition-colors tw-no-underline">
+<span>info&#64;makemybhagya.com</span>  </a>
+</div>
+
       </div>
       
       <!-- Right Side - Social Icons -->
@@ -48,7 +55,7 @@
 
       <!-- Right actions: CTA (desktop) + Hamburger (mobile) -->
       <div class="tw-flex tw-items-center tw-justify-end tw-space-x-3">
-        <button class="btn-shimmer tw-hidden lg:tw-inline-flex tw-items-center tw-justify-center tw-min-w-[220px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-8 tw-py-3.5 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+        <button (click)="onNavClick($event, 'services')" class="btn-shimmer tw-hidden lg:tw-inline-flex tw-items-center tw-justify-center tw-min-w-[220px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-8 tw-py-3.5 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
           Get Your Bhagya
         </button>
         <button (click)="toggleMenu()" class="lg:tw-hidden tw-text-gray-700 tw-focus:outline-none">
@@ -74,7 +81,7 @@
           <a href="#about" (click)="onNavClick($event, 'about', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">About Us</a>
           <a href="#services" (click)="onNavClick($event, 'services', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">Services</a>
           <a href="#testimonials" (click)="onNavClick($event, 'testimonials', true)" class="tw-block tw-py-3.5 tw-px-4 tw-rounded tw-text-lg tw-text-gray-800 hover:tw-bg-indigo-50 hover:tw-text-brand tw-font-semibold">Testimonials</a>
-          <button class="btn-shimmer tw-w-full tw-mt-4 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-6 tw-py-3.5 tw-rounded-full tw-shadow-lg">Get Your Bhagya</button>
+          <button (click)="onNavClick($event, 'services', true)" class="btn-shimmer tw-w-full tw-mt-4 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-6 tw-py-3.5 tw-rounded-full tw-shadow-lg">Get Your Bhagya</button>
         </nav>
       </div>
     </div>
@@ -105,7 +112,7 @@
               <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Discover your personalized numerology-based wealth codes
               </p>
-              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button (click)="onNavClick($event, 'services')" class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Generate Your Code Now
               </button>
             </div>
@@ -131,7 +138,7 @@
               <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Ancient numerology meets modern wealth manifestation
               </p>
-              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button (click)="onNavClick($event, 'services')" class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Start Your Journey
               </button>
             </div>
@@ -157,7 +164,7 @@
               <p class="tw-text-2xl md:tw-text-3xl tw-mb-12 tw-text-gray-200">
                 Get your custom Money Switch Code report in minutes
               </p>
-              <button class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
+              <button (click)="onNavClick($event, 'services')" class="btn-shimmer tw-inline-flex tw-items-center tw-justify-center tw-min-w-[240px] tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 hover:tw-from-yellow-500 hover:tw-to-yellow-700 tw-text-indigo-900 tw-text-lg tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-2xl hover:tw-shadow-yellow-500/50 tw-transition-all tw-duration-300 tw-transform hover:tw-scale-105">
                 Claim Your Report
               </button>
             </div>
