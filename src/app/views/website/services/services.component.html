@@ -1,1 +1,134 @@
-<p>services works!</p>
+<section id="services" class="tw-relative tw-py-16 md:tw-py-24 tw-bg-indigo-950 tw-text-white">
+  <!-- subtle background image layer for services -->
+  <div class="tw-absolute tw-inset-0 tw-z-0 tw-pointer-events-none" style="background-image: url('../../../../assets/numrology/astro123.jpg'); background-size: cover; background-position: center; opacity: 0.08;"></div>
+  <div class="tw-container tw-mx-auto tw-px-4 tw-relative tw-z-10">
+    <!-- Section Title -->
+    <div class="tw-text-center tw-mb-10 md:tw-mb-14">
+      <h2 class="tw-text-4xl md:tw-text-6xl tw-font-extrabold">Our Services</h2>
+      <div class="tw-mx-auto tw-mt-3 tw-h-1 tw-w-24 md:tw-w-32 tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-rounded-full"></div>
+    </div>
+
+    <!-- Loading / Error States -->
+    <div *ngIf="isLoading" class="tw-text-center tw-text-gray-300">Loading services...</div>
+    <div *ngIf="!isLoading && errorMessage" class="tw-text-center tw-text-red-300">{{ errorMessage }}</div>
+
+    <!-- Single service layout: card left, image right -->
+    <div *ngIf="!isLoading && !errorMessage && services.length === 1" class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-8 tw-items-center">
+      <!-- Card -->
+      <div class="service-card tw-bg-white tw-text-indigo-900 tw-rounded-2xl tw-shadow-2xl tw-overflow-hidden">
+        <img [src]="getImageUrl(services[0].image)" (error)="onImageError($event)" alt="service" class="tw-w-full tw-h-56 md:tw-h-64 tw-object-cover">
+        <div class="tw-p-6 md:tw-p-8">
+          <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold">{{ services[0].title }}</h3>
+          <p class="tw-mt-2 tw-text-gray-700">{{ services[0].description }}</p>
+          <div class="tw-mt-5 tw-flex tw-items-center tw-justify-between">
+            <span class="tw-text-brand tw-font-extrabold tw-text-xl">₹{{ services[0].price }}</span>
+            <button (click)="openModal(services[0])" class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-5 tw-py-2.5 tw-rounded-full tw-shadow-lg">Explore</button>
+          </div>
+        </div>
+      </div>
+      <!-- Right decorative image -->
+      <div class="tw-hidden lg:tw-block">
+        <div class="tw-rounded-2xl tw-overflow-hidden tw-shadow-2xl">
+          <img src="../../../../assets/numrology/baba1.png" alt="services" class="tw-w-full tw-h-[420px] tw-object-cover"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multiple services: 3-column responsive grid -->
+    <div *ngIf="!isLoading && !errorMessage && services.length > 1" class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
+      <div *ngFor="let service of services; trackBy: trackByServiceId" class="service-card tw-bg-white tw-text-indigo-900 tw-rounded-2xl tw-shadow-2xl tw-overflow-hidden tw-flex tw-flex-col">
+        <img [src]="getImageUrl(service.image)" (error)="onImageError($event)" alt="service" class="tw-w-full tw-h-48 md:tw-h-56 tw-object-cover">
+        <div class="tw-p-6 tw-flex-1 tw-flex tw-flex-col">
+          <h3 class="tw-text-xl md:tw-text-2xl tw-font-bold">{{ service.title }}</h3>
+          <p class="tw-mt-2 tw-text-gray-700 tw-line-clamp-3">{{ service.description }}</p>
+          <div class="tw-mt-5 tw-flex tw-items-center tw-justify-between tw-pt-3 tw-border-t tw-border-gray-200">
+            <span class="tw-text-brand tw-font-extrabold">₹{{ service.price }}</span>
+            <button (click)="openModal(service)" class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-5 tw-py-2.5 tw-rounded-full tw-shadow-lg">Explore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fallback placeholders when no services available -->
+    <div *ngIf="!isLoading && services.length === 0" class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-6">
+      <div class="tw-bg-white tw-text-indigo-900 tw-rounded-2xl tw-shadow-2xl tw-overflow-hidden tw-flex tw-flex-col" *ngFor="let i of [1,2,3]">
+        <img [src]="defaultImage" alt="service" class="tw-w-full tw-h-48 md:tw-h-56 tw-object-cover">
+        <div class="tw-p-6 tw-flex-1 tw-flex tw-flex-col">
+          <h3 class="tw-text-xl md:tw-text-2xl tw-font-bold">Service Title</h3>
+          <p class="tw-mt-2 tw-text-gray-700">Description will appear here once services are available.</p>
+          <div class="tw-mt-5 tw-flex tw-items-center tw-justify-between tw-pt-3 tw-border-t tw-border-gray-200">
+            <span class="tw-text-brand tw-font-extrabold">₹—</span>
+            <button class="btn-shimmer tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold tw-px-5 tw-py-2.5 tw-rounded-full tw-shadow-lg">Explore</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Explore Modal -->
+<div *ngIf="isModalOpen" class="modal-open tw-fixed tw-inset-0 tw-z-50 tw-flex tw-items-start md:tw-items-center tw-justify-center tw-overflow-y-auto">
+  <div class="tw-absolute tw-inset-0 tw-bg-black/50" (click)="closeModal()"></div>
+  <div class="modal-panel tw-relative tw-bg-white tw-w-[96%] md:tw-w-[900px] tw-max-h-[92vh] tw-overflow-y-auto tw-rounded-2xl tw-shadow-2xl tw-mt-6 md:tw-mt-0">
+    <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2">
+      <!-- Left: Service details -->
+      <div class="tw-bg-indigo-950 tw-text-white tw-p-6 md:tw-p-8">
+        <h3 class="tw-text-2xl md:tw-text-3xl tw-font-extrabold">{{ selectedService?.title }}</h3>
+        <img *ngIf="selectedService" [src]="getImageUrl(selectedService.image)" class="tw-mt-4 tw-rounded-xl tw-w-full tw-h-40 md:tw-h-48 tw-object-cover" (error)="onImageError($event)">
+        <p class="tw-mt-4 tw-text-gray-200">{{ selectedService?.description }}</p>
+        <div class="tw-mt-6 tw-text-2xl tw-font-extrabold tw-text-yellow-400">₹{{ selectedService?.price }}</div>
+      </div>
+      <!-- Right: Form -->
+      <div class="tw-p-6 md:tw-p-8">
+        <h4 class="tw-text-xl tw-font-bold tw-text-indigo-900">Your Details</h4>
+        <div *ngIf="modalMessage" [ngClass]="{'tw-bg-green-50 tw-text-green-700 tw-border-green-200': modalMessage.type === 'success', 'tw-bg-red-50 tw-text-red-700 tw-border-red-200': modalMessage.type === 'error'}" class="tw-mt-3 tw-border tw-rounded-lg tw-px-3 tw-py-2">
+          {{ modalMessage.text }}
+        </div>
+        <div class="tw-mt-4 tw-space-y-4">
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Full Name</label>
+            <input [(ngModel)]="form.fullName" [class.tw-border-red-400]="errors.fullName" placeholder="Enter your full name" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-brand"/>
+            <div *ngIf="errors.fullName" class="tw-text-red-600 tw-text-sm tw-mt-1">{{ errors.fullName }}</div>
+          </div>
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Date of Birth</label>
+            <input [(ngModel)]="form.dateOfBirth" type="date" [class.tw-border-red-400]="errors.dateOfBirth" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-brand"/>
+            <div *ngIf="errors.dateOfBirth" class="tw-text-red-600 tw-text-sm tw-mt-1">{{ errors.dateOfBirth }}</div>
+          </div>
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Email</label>
+            <input [(ngModel)]="form.email" type="email" [class.tw-border-red-400]="errors.email" placeholder="example@email.com" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-brand"/>
+            <div *ngIf="errors.email" class="tw-text-red-600 tw-text-sm tw-mt-1">{{ errors.email }}</div>
+          </div>
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Phone</label>
+            <input [(ngModel)]="form.phone" (keypress)="blockNonDigits($event)" (input)="sanitizePhoneInput()" maxlength="10" inputmode="numeric" pattern="[0-9]*" type="tel" [class.tw-border-red-400]="errors.phone" placeholder="10-digit phone" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-brand"/>
+            <div *ngIf="errors.phone" class="tw-text-red-600 tw-text-sm tw-mt-1">{{ errors.phone }}</div>
+          </div>
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Gender</label>
+            <select [(ngModel)]="form.gender" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2">
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="tw-block tw-text-sm tw-font-medium tw-text-gray-700">Profession (optional)</label>
+            <input [(ngModel)]="form.profession" class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-3 tw-py-2"/>
+          </div>
+        </div>
+        <div class="tw-mt-6 tw-flex tw-items-center tw-justify-end tw-gap-3">
+          <button (click)="closeModal()" class="tw-px-4 tw-py-2 tw-rounded-lg tw-border tw-border-gray-300 tw-text-gray-700">Cancel</button>
+          <button (click)="payNow()" [disabled]="!canPay()" [ngClass]="{'tw-opacity-60 tw-cursor-not-allowed': !canPay()}" class="btn-shimmer tw-px-6 tw-py-3 tw-rounded-full tw-bg-gradient-to-r tw-from-yellow-400 tw-to-yellow-600 tw-text-indigo-900 tw-font-bold">Pay ₹{{ selectedService?.price }}</button>
+        </div>
+      </div>
+    </div>
+    <button (click)="closeModal()" class="tw-absolute tw-top-3 tw-right-3 tw-text-gray-500 hover:tw-text-gray-700">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+</div>
+
+
+

@@ -11,7 +11,6 @@ class ApiEndpoints {
   public PROFILE: string = `${this.PATH}/profile`;
 
   // ==================== MAKE MY BHAGYA - MONEY SWITCH CODE ====================
-  public GENERATE_MONEY_CODE: string = `${this.PATH}/money-switch/generate`;
   public RESEND_EMAIL: string = `${this.PATH}/money-switch/resend-email`;
 
   // ==================== SERVICE ROUTES ====================
@@ -38,6 +37,8 @@ class ApiEndpoints {
 
 // ==================== PUBLIC ROUTES (NO AUTH) ====================
 public GET_PUBLIC_SERVICES: string = `${this.PATH}/services/list`;
+public GENERATE_MONEY_CODE: string = `${this.PATH}/money-switch/generate`;
+
 
 }
 
