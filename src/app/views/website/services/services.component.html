@@ -322,42 +322,89 @@
             </div>
           </div>
 
-          <div>
-            <label class="tw-block tw-text-sm tw-font-semibold tw-text-gray-700 tw-mb-1">
-              Email <span class="tw-text-red-500">*</span>
-            </label>
-            <input [(ngModel)]="form.email" 
-                   [disabled]="isSubmitting"
-                   type="email" 
-                   [class.tw-border-red-400]="errors.email" 
-                   placeholder="example@gmail.com" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
-            <div *ngIf="errors.email" class="tw-text-red-600 tw-text-xs tw-mt-1">
-              {{ errors.email }}
-            </div>
-            <p class="tw-text-xs tw-text-gray-500 tw-mt-1">Enter a valid email with proper domain (.com, .in, .org, etc.)</p>
-          </div>
+          <!-- Email Field -->
+<div>
+  <label class="tw-block tw-text-sm tw-font-semibold tw-text-gray-700 tw-mb-1">
+    Email <span class="tw-text-red-500">*</span>
+  </label>
+  <div class="tw-relative">
+    <input [(ngModel)]="form.email" 
+           (input)="onEmailChange()"
+           [disabled]="isSubmitting"
+           type="email" 
+           [class.tw-border-red-400]="errors.email || isDuplicateEmail" 
+           [class.tw-border-green-400]="form.email && !errors.email && !isDuplicateEmail && moneyCode.validateEmailFormat(form.email)"
+           placeholder="example@gmail.com" 
+           class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 tw-pr-10 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
+    
+    <!-- Loading Spinner -->
+    <div *ngIf="isCheckingDuplicate && form.email" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-spinner fa-spin tw-text-gray-400"></i>
+    </div>
+    
+    <!-- Success Icon -->
+    <div *ngIf="!isCheckingDuplicate && form.email && !errors.email && !isDuplicateEmail && moneyCode.validateEmailFormat(form.email)" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-check-circle tw-text-green-500"></i>
+    </div>
+    
+    <!-- Error Icon -->
+    <div *ngIf="(errors.email || isDuplicateEmail) && form.email" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-times-circle tw-text-red-500"></i>
+    </div>
+  </div>
+  
+  <div *ngIf="errors.email || isDuplicateEmail" class="tw-text-red-600 tw-text-xs tw-mt-1">
+    {{ errors.email || (isDuplicateEmail ? 'This email is already registered' : '') }}
+  </div>
+  <p class="tw-text-xs tw-text-gray-500 tw-mt-1">Enter a valid email with proper domain (.com, .in, .org, etc.)</p>
+</div>
 
-          <div>
-            <label class="tw-block tw-text-sm tw-font-semibold tw-text-gray-700 tw-mb-1">
-              Phone Number <span class="tw-text-red-500">*</span>
-            </label>
-            <input [(ngModel)]="form.phone" 
-                   [disabled]="isSubmitting"
-                   (keypress)="blockNonDigits($event)" 
-                   (input)="sanitizePhoneInput()" 
-                   (paste)="onPhonePaste($event)"
-                   maxlength="10" 
-                   inputmode="numeric" 
-                   pattern="[0-9]*" 
-                   type="tel" 
-                   [class.tw-border-red-400]="errors.phone" 
-                   placeholder="10-digit phone number" 
-                   class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
-            <div *ngIf="errors.phone" class="tw-text-red-600 tw-text-xs tw-mt-1">
-              {{ errors.phone }}
-            </div>
-          </div>
+<!-- Phone Field -->
+<div>
+  <label class="tw-block tw-text-sm tw-font-semibold tw-text-gray-700 tw-mb-1">
+    Phone Number <span class="tw-text-red-500">*</span>
+  </label>
+  <div class="tw-relative">
+    <input [(ngModel)]="form.phone" 
+           [disabled]="isSubmitting"
+           (keypress)="blockNonDigits($event)" 
+           (input)="sanitizePhoneInput()" 
+           (paste)="onPhonePaste($event)"
+           maxlength="10" 
+           inputmode="numeric" 
+           pattern="[0-9]*" 
+           type="tel" 
+           [class.tw-border-red-400]="errors.phone || isDuplicatePhone" 
+           [class.tw-border-green-400]="form.phone && !errors.phone && !isDuplicatePhone && moneyCode.validatePhoneFormat(form.phone)"
+           placeholder="10-digit phone number" 
+           class="tw-w-full tw-border tw-border-gray-300 tw-rounded-lg tw-px-4 tw-py-2.5 tw-pr-10 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-yellow-400 disabled:tw-bg-gray-100 disabled:tw-cursor-not-allowed"/>
+    
+    <!-- Loading Spinner -->
+    <div *ngIf="isCheckingDuplicate && form.phone" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-spinner fa-spin tw-text-gray-400"></i>
+    </div>
+    
+    <!-- Success Icon -->
+    <div *ngIf="!isCheckingDuplicate && form.phone && !errors.phone && !isDuplicatePhone && moneyCode.validatePhoneFormat(form.phone)" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-check-circle tw-text-green-500"></i>
+    </div>
+    
+    <!-- Error Icon -->
+    <div *ngIf="(errors.phone || isDuplicatePhone) && form.phone" 
+         class="tw-absolute tw-right-3 tw-top-1/2 tw-transform tw--translate-y-1/2">
+      <i class="fas fa-times-circle tw-text-red-500"></i>
+    </div>
+  </div>
+  
+  <div *ngIf="errors.phone || isDuplicatePhone" class="tw-text-red-600 tw-text-xs tw-mt-1">
+    {{ errors.phone || (isDuplicatePhone ? 'This mobile number is already registered' : '') }}
+  </div>
+</div>
 
           <div>
             <label class="tw-block tw-text-sm tw-font-semibold tw-text-gray-700 tw-mb-1">

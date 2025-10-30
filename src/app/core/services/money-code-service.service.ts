@@ -4,7 +4,9 @@ import { ApiManagerService } from '../utilities/api-manager';
 import { apiEndpoints } from '../constants/api-endpoint';
 import {
   GenerateMoneyCodeRequest,
-  GenerateMoneyCodeResponse
+  GenerateMoneyCodeResponse,
+  CheckDuplicateRequest,
+  CheckDuplicateResponse
 } from '../interfaces/money-code.interface';
 
 @Injectable({
@@ -90,4 +92,16 @@ export class MoneyCodeService {
     link.click();
     document.body.removeChild(link);
   }
+
+  /**
+ * Check if email and phone are already registered
+ * @param data - Email and phone to check
+ * @returns Observable of availability status
+ */
+checkDuplicate(data: CheckDuplicateRequest): Observable<CheckDuplicateResponse> {
+  return this.apiManager.post(apiEndpoints.CHECK_DUPLICATE, data);
+}
+
+
+
 }

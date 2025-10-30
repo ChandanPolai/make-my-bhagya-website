@@ -64,3 +64,18 @@ export interface GenerateMoneyCodeRequest {
   paymentId?: string;
   orderId?: string;
 }
+
+
+export interface CheckDuplicateRequest {
+  email: string;
+  phone: string;
+}
+
+// Check Duplicate Response
+export interface CheckDuplicateResponse {
+  message: string;
+  data: {
+    available: boolean;
+  } | null;
+  status: number;
+}

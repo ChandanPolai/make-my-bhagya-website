@@ -5,6 +5,7 @@ import { PublicServicesService } from '../../../core/services/public-servies.ser
 import { PublicService } from '../../../core/interfaces/public-services.interface';
 import { environment } from '../../../../env/env.local';
 import { MoneyCodeService } from '../../../core/services/money-code-service.service';
+import { debounceTime, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-services',
@@ -35,16 +36,36 @@ export class ServicesComponent implements OnInit {
   errors: { [K in keyof typeof this.form]?: string } = {};
   modalMessage: { type: 'success' | 'error'; text: string } | null = null;
   isSubmitting = false;
+  isCheckingDuplicate = false;
 
-  // Success response data
+  // Duplicate check flags
+  isDuplicateEmail = false;
+  isDuplicatePhone = false;
+
   generatedData: any = null;
 
   private razorpayLoaded = false;
+  private emailCheckSubject = new Subject<string>();
+  private phoneCheckSubject = new Subject<string>();
 
   constructor(
     private publicServices: PublicServicesService, 
-    private moneyCode: MoneyCodeService
-  ) {}
+    public moneyCode: MoneyCodeService
+  ) {
+    // Debounce email check (wait 800ms after user stops typing)
+    this.emailCheckSubject.pipe(debounceTime(800)).subscribe(email => {
+      if (email && this.moneyCode.validateEmailFormat(email) && this.isValidEmailDomain(email)) {
+        this.checkEmailDuplicate(email);
+      }
+    });
+
+    // Debounce phone check (wait 800ms after user stops typing)
+    this.phoneCheckSubject.pipe(debounceTime(800)).subscribe(phone => {
+      if (phone && this.moneyCode.validatePhoneFormat(phone)) {
+        this.checkPhoneDuplicate(phone);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loadServices();
@@ -112,6 +133,8 @@ export class ServicesComponent implements OnInit {
     this.errors = {};
     this.modalMessage = null;
     this.isSubmitting = false;
+    this.isDuplicateEmail = false;
+    this.isDuplicatePhone = false;
   }
 
   private loadRazorpayScript(): void {
@@ -120,6 +143,62 @@ export class ServicesComponent implements OnInit {
     script.src = 'https://checkout.razorpay.com/v1/checkout.js';
     script.onload = () => (this.razorpayLoaded = true);
     document.body.appendChild(script);
+  }
+
+  // Check Email Duplicate
+  onEmailChange(): void {
+    this.isDuplicateEmail = false;
+    this.errors.email = '';
+    this.emailCheckSubject.next(this.form.email);
+  }
+
+  private checkEmailDuplicate(email: string): void {
+    this.isCheckingDuplicate = true;
+    
+    this.moneyCode.checkDuplicate({ 
+      email: email.toLowerCase(), 
+      phone: this.form.phone || '0000000000' // dummy phone for email-only check
+    }).subscribe({
+      next: () => {
+        this.isDuplicateEmail = false;
+        this.isCheckingDuplicate = false;
+      },
+      error: (error) => {
+        this.isCheckingDuplicate = false;
+        if (error?.status === 409) {
+          this.isDuplicateEmail = true;
+          this.errors.email = 'This email address is already registered';
+        }
+      }
+    });
+  }
+
+  // Check Phone Duplicate
+  onPhoneChange(): void {
+    this.isDuplicatePhone = false;
+    this.errors.phone = '';
+    this.phoneCheckSubject.next(this.form.phone);
+  }
+
+  private checkPhoneDuplicate(phone: string): void {
+    this.isCheckingDuplicate = true;
+    
+    this.moneyCode.checkDuplicate({ 
+      email: this.form.email || 'temp@example.com', // dummy email for phone-only check
+      phone: phone
+    }).subscribe({
+      next: () => {
+        this.isDuplicatePhone = false;
+        this.isCheckingDuplicate = false;
+      },
+      error: (error) => {
+        this.isCheckingDuplicate = false;
+        if (error?.status === 409) {
+          this.isDuplicatePhone = true;
+          this.errors.phone = 'This mobile number is already registered';
+        }
+      }
+    });
   }
 
   private onPaymentSuccess(resp: any): void {
@@ -166,7 +245,6 @@ export class ServicesComponent implements OnInit {
     this.errors = {};
     let isValid = true;
 
-    // Full Name validation
     if (!this.form.fullName.trim()) {
       this.errors.fullName = 'Full name is required';
       isValid = false;
@@ -178,13 +256,11 @@ export class ServicesComponent implements OnInit {
       isValid = false;
     }
 
-    // Date of Birth validation - ACCEPTS ANY DATE (REMOVED RESTRICTIONS)
     if (!this.form.dateOfBirth) {
       this.errors.dateOfBirth = 'Date of birth is required';
       isValid = false;
     }
 
-    // Email validation with domain check
     if (!this.form.email.trim()) {
       this.errors.email = 'Email is required';
       isValid = false;
@@ -194,14 +270,19 @@ export class ServicesComponent implements OnInit {
     } else if (!this.isValidEmailDomain(this.form.email)) {
       this.errors.email = 'Please enter a valid email domain (e.g., .com, .in, .org)';
       isValid = false;
+    } else if (this.isDuplicateEmail) {
+      this.errors.email = 'This email address is already registered';
+      isValid = false;
     }
 
-    // Phone validation
     if (!this.form.phone.trim()) {
       this.errors.phone = 'Phone number is required';
       isValid = false;
     } else if (!this.moneyCode.validatePhoneFormat(this.form.phone)) {
       this.errors.phone = 'Enter a valid 10-digit phone number';
+      isValid = false;
+    } else if (this.isDuplicatePhone) {
+      this.errors.phone = 'This mobile number is already registered';
       isValid = false;
     }
 
@@ -210,6 +291,7 @@ export class ServicesComponent implements OnInit {
 
   sanitizePhoneInput(): void {
     this.form.phone = (this.form.phone || '').replace(/\D/g, '').slice(0, 10);
+    this.onPhoneChange(); // Trigger duplicate check
   }
 
   blockNonDigits(event: KeyboardEvent): void {
@@ -233,6 +315,7 @@ export class ServicesComponent implements OnInit {
     const pastedText = event.clipboardData?.getData('text') || '';
     const numericOnly = pastedText.replace(/\D/g, '').slice(0, 10);
     this.form.phone = numericOnly;
+    this.onPhoneChange();
   }
 
   blockNonAlphabets(event: KeyboardEvent): void {
@@ -247,7 +330,10 @@ export class ServicesComponent implements OnInit {
   }
 
   canPay(): boolean {
-    if (this.isSubmitting) return false;
+    // Disable if submitting or checking duplicate or if duplicate exists
+    if (this.isSubmitting || this.isCheckingDuplicate || this.isDuplicateEmail || this.isDuplicatePhone) {
+      return false;
+    }
     
     const nameOk = !!this.form.fullName.trim() && 
                    /^[a-zA-Z\s]+$/.test(this.form.fullName) &&
@@ -260,19 +346,14 @@ export class ServicesComponent implements OnInit {
     return nameOk && dobOk && emailOk && phoneOk;
   }
 
-  // Validate that email has proper domain (.com, .in, .org, .net, .co.in, etc.)
   private isValidEmailDomain(email: string): boolean {
     if (!email || !email.trim()) return false;
     const trimmedEmail = email.trim().toLowerCase();
     
-    // Check if email has @ and a domain with at least one dot after @
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(trimmedEmail)) return false;
     
-    // Extract domain part after @
     const domainPart = trimmedEmail.split('@')[1];
-    
-    // Check if domain ends with common extensions
     const validDomains = ['.com', '.in', '.org', '.net', '.edu', '.gov', '.co.in', '.co', '.io'];
     return validDomains.some(domain => domainPart.endsWith(domain));
   }
@@ -317,7 +398,6 @@ export class ServicesComponent implements OnInit {
     rz.open();
   }
 
-  // Download PDF Report
   downloadReport(): void {
     if (this.generatedData?.reportUrl) {
       const reportUrl = this.moneyCode.getReportUrl(this.generatedData.reportUrl);

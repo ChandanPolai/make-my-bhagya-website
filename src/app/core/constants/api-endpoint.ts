@@ -38,6 +38,8 @@ class ApiEndpoints {
 // ==================== PUBLIC ROUTES (NO AUTH) ====================
 public GET_PUBLIC_SERVICES: string = `${this.PATH}/public/services/list`;
 public GENERATE_MONEY_CODE: string = `${this.PATH}/money-switch/generate`;
+public CHECK_DUPLICATE: string = `${this.PATH}/money-switch/check-duplicate`;
+
 
 
 }
