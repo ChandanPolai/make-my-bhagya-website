@@ -226,9 +226,17 @@ export class ServicesComponent implements OnInit {
         this.isSubmitting = false;
         this.generatedData = response.data;
         
+        // Enhanced success message with codes info
+        const codes = response.data.moneyCodes;
+        const codesText = codes?.shortTerm 
+          ? `Short-Term: ${codes.shortTerm}, Mid-Term: ${codes.midTerm}, Long-Term: ${codes.longTerm}`
+          : codes?.daily 
+            ? `Daily: ${codes.daily}, Wealth: ${codes.wealth}, Luxury: ${codes.luxury}, Master: ${codes.master}`
+            : '';
+        
         this.modalMessage = { 
           type: 'success', 
-          text: '✅ Success! Your Money Switch Code has been generated and sent to your email.' 
+          text: `✅ Success! Your Money Switch Code has been generated and sent to your email. ${codesText ? 'Your codes: ' + codesText : ''}` 
         };
       },
       error: (error) => {

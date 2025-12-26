@@ -1,16 +1,44 @@
 // Money Codes Structure
 export interface MoneyCodes {
-  daily: string;
-  wealth: string;
-  luxury: string;
-  master: string;
+  // NEW Structure
+  shortTerm: string;
+  midTerm: string;
+  longTerm: string;
+  // Legacy fields (backward compatibility)
+  daily?: string;
+  wealth?: string;
+  luxury?: string;
+  master?: string;
 }
 
 // Numerology Data
 export interface NumerologyData {
-  dayNumber: number;
-  lifePathNumber: number;
-  nameNumber: number;
+  // NEW Structure
+  birthNumber?: {
+    compound: number;
+    root: number;
+    planet: string;
+  };
+  destinyNumber?: {
+    compound: number;
+    root: number;
+    planet: string;
+  };
+  nameNumber?: {
+    compound: number;
+    root: number;
+    planet: string;
+  };
+  dominantPlanet?: {
+    root: number;
+    planet: string;
+    color: string;
+    pen: string;
+  };
+  // Legacy fields (backward compatibility)
+  dayNumber?: number;
+  lifePathNumber?: number;
+  // Note: nameNumber is now an object above, legacy number field removed to avoid duplicate
 }
 
 // Service Info (embedded in response)
