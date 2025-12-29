@@ -74,7 +74,7 @@ export class MoneyCodeService {
    * @returns Full URL
    */
   getReportUrl(reportPath: string): string {
-    const baseUrl = 'https://makemybhagya.itfuturz.in'; // Replace with actual backend URL
+    const baseUrl = 'https://makemybhagya.com'; // Replace with actual backend URL
     return `${baseUrl}${reportPath}`;
   }
 

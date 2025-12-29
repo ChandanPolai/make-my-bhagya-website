@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseURL: 'https://makemybhagya.itfuturz.in',
-  imageUrl: 'https://makemybhagya.itfuturz.in/',
+  baseURL: 'https://makemybhagya.com',
+  imageUrl: 'https://makemybhagya.com/',
   route:'admin'
 }
