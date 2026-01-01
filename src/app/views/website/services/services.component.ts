@@ -373,7 +373,7 @@ export class ServicesComponent implements OnInit {
     const amountPaise = Math.max(1, Math.round((this.selectedService.price || 0) * 100));
 
     const options: any = {
-      key: 'rzp_test_huTmioKmO2Z4SA',
+      key: 'rzp_live_Ryc6xXe5LfNSoA',
       amount: amountPaise,
       currency: 'INR',
       name: 'Make My Bhagya',
